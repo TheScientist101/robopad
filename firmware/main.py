@@ -1,6 +1,7 @@
 import board
 import busio
 import analogio
+import neopixel
 
 from adafruit_mcp3426 import MCP3426
 from adafruit_mcp23008 import MCP23008
@@ -144,6 +145,25 @@ def update_brightness():
         cc.send(ConsumerControlCode.BRIGHTNESS_DECREMENT)
     old_brightness = brightness_level
 
+pixel = neopixel.NeoPixel(board.GP2, 9, brightness=0.5, auto_write=True)
+
+def fade_colors():
+    colors = [
+        (255, 0, 0),  # Red
+        (0, 255, 0),  # Green
+        (0, 0, 255),  # Blue
+        (255, 255, 0),  # Yellow
+        (0, 255, 255),  # Cyan
+        (255, 0, 255),  # Magenta
+        (255, 255, 255)  # White
+    ]
+    while True:
+        for color in colors:
+            for i in range(256):
+                faded_color = tuple(int(c * i / 255) for c in color)
+                pixel.fill(faded_color)
+                time.sleep(0.01)
+
 def update_inputs():
     update_joystick()
     update_volume()
@@ -153,3 +173,4 @@ if __name__ == '__main__':
     while True:
         update_inputs()
         keyboard.go()
+        fade_colors()

@@ -3,4 +3,4 @@ use <case_top.scad>
 
 translate([0, 0, 5]) case_top();
 translate([0, 0, -1.5]) case_bottom();
-color("green") translate([0, 0, 0]) import("./components/pcb.stl");
+color("green") import("./components/pcb.stl");

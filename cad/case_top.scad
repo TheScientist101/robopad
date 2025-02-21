@@ -7,8 +7,8 @@ module case_top() {
     difference() {
         union() {
             cuboid([120, 120, height], rounding=1, except=BOTTOM);
-            translate([-30, 30, height]) cylinder(r=17, h=height + 10, center=true);
-            translate([30, 30, height]) cylinder(r=17, h=height + 10, center=true);
+            translate([-30, 30, height + 2.5]) cylinder(r=17, h=height + 5, center=true);
+            translate([30, 30, height + 2.5]) cylinder(r=17, h=height + 5, center=true);
         }
 
         translate([-30, 30, 0]) cylinder(r=15, h=30+overlapBuffer, center=true);
